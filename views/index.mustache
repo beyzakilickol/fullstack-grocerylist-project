@@ -14,14 +14,20 @@
    <label>Enter store city:<input type="text" name="city"/></label>
    <label>Enter store state:<input type="text" name="state"/></label>
 <input class="btn btn-primary text-white" type="submit" value="Add Store"/>
+</form>
+<div id="welcome">
+  Welcome {{username}}
+  <a href="/logout"><button class="btn btn-warning">Logout</button></a>
+</div>
+
    <br /><br/>
 
 
 </nav>
 <div id="container">
 {{#stores}}
-  <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-    
+  <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+
 
 
     <a href="/delete/{{id}}"><i id="close" class="fas fa-times"></i></a>
@@ -32,11 +38,21 @@
       </p>
     </div>
     <div class="card-body">
-      <h5 class="card-title"><label>Enter item:<input type="text" name="items"/></label>
+      <form action="/add_item" method="POST">
 
-      <button class="btn btn-warning">Add item</button>
-      </form></h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <h5 class="card-title"><label>Enter item:</label><input type="text" name="item"/>
+      <input type="hidden" name="storeId" value="{{id}}" />
+      <input type="submit" value="Add" class="btn btn-warning"></input>
+      </h5></form>
+      <p class="card-text">
+        {{#items}}
+
+
+          {{name}}
+          <a href="/deleteItem/{{id}}"><i id="delete-item" class="fas fa-times"></i></a>
+      &nbsp;&nbsp;&nbsp;
+        {{/items}}
+    </p>
     </div>
   </div>
   {{/stores}}
